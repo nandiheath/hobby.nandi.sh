@@ -8,9 +8,9 @@ import Gallery from './pages/Gallery';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100">
+    <div className="min-h-screen bg-transparent flex flex-col font-sans selection:bg-indigo-100 selection:text-indigo-900">
       <Navbar />
-      <main className="flex-grow py-8 md:py-16">
+      <main className="flex-grow py-12 md:py-20 lg:py-24">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/portfolio" element={<Portfolio />} />
@@ -18,8 +18,15 @@ function App() {
           <Route path="/gallery" element={<Gallery />} />
         </Routes>
       </main>
-      <footer className="py-8 border-t text-center text-sm opacity-60">
-        &copy; {new Date().getFullYear()} hobby.nandi.sh. All rights reserved.
+      <footer className="py-12 border-t border-gray-100 dark:border-gray-800 text-center">
+        <div className="container mx-auto px-4">
+          <p className="text-sm font-bold text-gray-400 dark:text-gray-500 tracking-widest uppercase mb-2">
+            hobby.nandi.sh
+          </p>
+          <p className="text-xs text-gray-400 dark:text-gray-600">
+            &copy; {new Date().getFullYear()} Crafted with passion for the modeling community.
+          </p>
+        </div>
       </footer>
     </div>
   );

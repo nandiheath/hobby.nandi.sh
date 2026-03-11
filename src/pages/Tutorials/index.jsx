@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, ListGroup, InputGroup, Form, Card } from 'react-bootstrap';
-import { Search, Clock, PlayCircle } from 'lucide-react';
+import { Search, Clock, PlayCircle, ArrowRight } from 'lucide-react';
 
 const Tutorials = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -17,22 +17,22 @@ const Tutorials = () => {
   );
 
   return (
-    <div className="bg-light dark:bg-gray-950 min-vh-100">
+    <div className="bg-transparent">
       <Container className="max-w-4xl">
         <div className="text-center mb-12">
-          <h1 className="display-4 font-extrabold text-indigo-600 dark:text-indigo-400 mb-3">Skill Tutorials</h1>
-          <p className="lead text-gray-600 dark:text-gray-400">Master the art of miniature painting and model building.</p>
+          <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-3 tracking-tight">Skill Tutorials</h1>
+          <p className="text-lg text-gray-500 dark:text-gray-400 font-medium">Master the art of miniature painting and model building.</p>
         </div>
         
-        <Card className="border-0 shadow-sm rounded-4 overflow-hidden mb-10">
-          <Card.Body className="p-2">
+        <Card className="glass-card border-0 rounded-[2rem] overflow-hidden mb-12 p-2">
+          <Card.Body className="p-0">
             <InputGroup size="lg" className="border-0">
-              <InputGroup.Text className="bg-white dark:bg-gray-800 border-0 pl-4">
+              <InputGroup.Text className="bg-transparent border-0 pl-6">
                 <Search className="text-gray-400 w-6 h-6" />
               </InputGroup.Text>
               <Form.Control 
                 placeholder="Search tutorials by title..." 
-                className="border-0 py-4 focus:ring-0 bg-white dark:bg-gray-800 text-lg"
+                className="border-0 py-4 focus:ring-0 bg-transparent dark:text-white text-lg font-medium placeholder:text-gray-400 placeholder:font-normal"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -40,40 +40,48 @@ const Tutorials = () => {
           </Card.Body>
         </Card>
 
-        <ListGroup variant="flush" className="rounded-4 shadow-sm overflow-hidden border-0">
+        <div className="space-y-6">
           {filteredTutorials.map(tutorial => (
-            <ListGroup.Item 
+            <div 
               key={tutorial.id} 
-              className="p-8 border-bottom border-gray-100 dark:border-gray-800 dark:bg-gray-900 hover:bg-indigo-50/30 dark:hover:bg-indigo-900/10 transition-all cursor-pointer group"
+              className="glass-card p-6 md:p-10 rounded-[2.5rem] group hover:scale-[1.02] transition-all cursor-pointer border-0"
             >
               <Row className="align-items-center">
                 <Col xs="auto">
-                  <div className="w-14 h-14 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <PlayCircle size={28} />
+                  <div className="w-16 h-16 rounded-2xl bg-indigo-600 text-white flex items-center justify-center shadow-lg shadow-indigo-600/30 group-hover:rotate-12 transition-transform">
+                    <PlayCircle size={32} fill="white" />
                   </div>
                 </Col>
-                <Col className="ms-3">
-                  <h3 className="h4 font-bold mb-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                <Col className="ms-4">
+                  <h3 className="text-2xl font-black mb-2 dark:text-white group-hover:text-indigo-600 transition-colors">
                     {tutorial.title}
                   </h3>
-                  <div className="flex flex-column flex-sm-row items-sm-center gap-2 gap-sm-4 text-sm text-gray-500 dark:text-gray-400 font-medium">
-                    <span className="flex items-center gap-1"><Clock size={16} /> {tutorial.duration}</span>
-                    <span className="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-800 uppercase tracking-wider text-[10px]">{tutorial.level}</span>
+                  <div className="flex flex-wrap items-center gap-4 text-sm font-bold">
+                    <span className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
+                      <Clock size={18} className="text-indigo-600" /> {tutorial.duration}
+                    </span>
+                    <Badge className="bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-lg px-3 py-1.5 uppercase tracking-wider text-[11px] border-0">
+                      {tutorial.level}
+                    </Badge>
                   </div>
                 </Col>
-                <Col xs="auto">
-                  <span className="text-indigo-600 font-bold opacity-0 group-hover:opacity-100 transition-opacity">Watch Now →</span>
+                <Col xs="auto" className="hidden md:block">
+                  <div className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                    <ArrowRight size={24} />
+                  </div>
                 </Col>
               </Row>
-            </ListGroup.Item>
+            </div>
           ))}
+          
           {filteredTutorials.length === 0 && (
-            <ListGroup.Item className="p-12 text-center bg-white dark:bg-gray-900">
-              <div className="text-4xl mb-4">🔍</div>
-              <p className="text-gray-500 dark:text-gray-400 text-lg">No tutorials found matching "{searchTerm}"</p>
-            </ListGroup.Item>
+            <div className="glass-card p-20 text-center rounded-[3rem]">
+              <div className="text-6xl mb-6 opacity-30">🔍</div>
+              <h3 className="text-2xl font-black text-gray-500 mb-2">No tutorials found</h3>
+              <p className="text-gray-400 font-medium">Try searching for different keywords or browse all guides.</p>
+            </div>
           )}
-        </ListGroup>
+        </div>
       </Container>
     </div>
   );

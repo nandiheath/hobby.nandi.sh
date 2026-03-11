@@ -50,7 +50,7 @@ npm run build
 
 ## 🚢 Deployment
 
-This project is configured to automatically deploy to **GitHub Pages** whenever changes are pushed to the `main` branch via GitHub Actions.
+This project is configured to automatically deploy to the **gh-pages** branch on GitHub whenever changes are pushed to the `main` branch via GitHub Actions. GitHub Pages should be configured to serve from the `gh-pages` branch.
 
 - **URL**: [https://hobby.nandi.sh](https://hobby.nandi.sh)
 - **Workflow**: `.github/workflows/deploy.yml`

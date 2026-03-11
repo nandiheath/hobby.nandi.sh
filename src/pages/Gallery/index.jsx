@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Badge, Form, InputGroup } from 'react-bootstrap';
-import { Search, Image as ImageIcon, Filter } from 'lucide-react';
+import { Search, Image as ImageIcon, Filter, Maximize2 } from 'lucide-react';
 
 const Gallery = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,48 +18,51 @@ const Gallery = () => {
   );
 
   return (
-    <div className="bg-light dark:bg-gray-950 min-vh-100">
+    <div className="bg-transparent">
       <Container>
-        <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-12">
-          <div className="text-center text-md-start mb-6 mb-md-0">
-            <h1 className="display-4 font-extrabold text-indigo-600 dark:text-indigo-400 mb-2">Gallery</h1>
-            <p className="lead text-gray-600 dark:text-gray-400">A visual record of the modeling process.</p>
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-16 gap-6">
+          <div className="text-center text-md-start">
+            <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-2 tracking-tight">Visual Gallery</h1>
+            <p className="text-lg text-gray-500 dark:text-gray-400 font-medium">A visual record of the creative modeling process.</p>
           </div>
           
           <div className="w-100 max-w-md">
-            <InputGroup size="lg" className="shadow-sm rounded-4 overflow-hidden border-0">
-              <InputGroup.Text className="bg-white dark:bg-gray-800 border-0 pl-4">
-                <Search className="text-gray-400" size={20} />
-              </InputGroup.Text>
-              <Form.Control 
-                placeholder="Search by title or #tag..." 
-                className="border-0 py-3 focus:ring-0 bg-white dark:bg-gray-800"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <InputGroup.Text className="bg-white dark:bg-gray-800 border-0 pr-4">
-                <Filter className="text-gray-400 cursor-pointer hover:text-indigo-600" size={20} />
-              </InputGroup.Text>
-            </InputGroup>
+            <Card className="glass-card border-0 rounded-2xl overflow-hidden p-1">
+              <InputGroup size="lg" className="border-0 bg-transparent">
+                <InputGroup.Text className="bg-transparent border-0 pl-4">
+                  <Search className="text-gray-400" size={20} />
+                </InputGroup.Text>
+                <Form.Control 
+                  placeholder="Search by title or #tag..." 
+                  className="border-0 py-3 focus:ring-0 bg-transparent dark:text-white font-medium"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <InputGroup.Text className="bg-transparent border-0 pr-4">
+                  <Filter className="text-gray-400 cursor-pointer hover:text-indigo-600" size={20} />
+                </InputGroup.Text>
+              </InputGroup>
+            </Card>
           </div>
         </div>
 
         <Row className="g-6">
           {filteredImages.map(img => (
             <Col key={img.id} lg={3} md={4} sm={6}>
-              <Card className="h-100 border-0 shadow-sm rounded-4 overflow-hidden group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                <div className="h-48 bg-gray-200 dark:bg-gray-800 flex items-center justify-center relative overflow-hidden">
-                  <ImageIcon className="text-gray-400 group-hover:scale-110 transition-transform duration-500" size={48} />
-                  <div className="absolute inset-0 bg-indigo-600/0 group-hover:bg-indigo-600/10 transition-colors duration-300"></div>
+              <Card className="glass-card h-100 border-0 rounded-[2rem] overflow-hidden group hover:scale-[1.05] transition-all duration-500">
+                <div className="h-56 bg-gray-100 dark:bg-gray-800/50 flex items-center justify-center relative overflow-hidden">
+                  <ImageIcon className="text-gray-300 dark:text-gray-600 group-hover:scale-125 transition-transform duration-700" size={64} />
+                  <div className="absolute inset-0 bg-indigo-600/0 group-hover:bg-indigo-600/20 transition-all duration-500 flex items-center justify-center">
+                    <Maximize2 className="text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500" size={32} />
+                  </div>
                 </div>
-                <Card.Body className="p-4 bg-white dark:bg-gray-900">
-                  <Card.Title className="h5 font-bold mb-3">{img.title}</Card.Title>
+                <Card.Body className="p-6">
+                  <Card.Title className="text-xl font-black mb-4 dark:text-white">{img.title}</Card.Title>
                   <div className="flex flex-wrap gap-2">
                     {img.tags.map(tag => (
                       <Badge 
                         key={tag} 
-                        bg="none" 
-                        className="px-2 py-1 rounded-pill text-[10px] font-bold uppercase tracking-wider border border-indigo-100 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 bg-indigo-50/50 dark:bg-indigo-900/20"
+                        className="px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest border-0 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 group-hover:bg-indigo-600 group-hover:text-white transition-colors"
                       >
                         #{tag}
                       </Badge>
@@ -72,10 +75,10 @@ const Gallery = () => {
         </Row>
         
         {filteredImages.length === 0 && (
-          <div className="text-center py-20 bg-white dark:bg-gray-900 rounded-5 shadow-sm mt-8 border border-gray-100 dark:border-gray-800">
-            <div className="display-1 mb-4 opacity-20">🖼️</div>
-            <h3 className="h4 font-bold text-gray-500">No matches found for "{searchTerm}"</h3>
-            <p className="text-gray-400">Try searching for different tags like #WIP or #Finished</p>
+          <div className="glass-card p-20 text-center rounded-[3rem] mt-12">
+            <div className="text-7xl mb-6 opacity-20">🖼️</div>
+            <h3 className="text-2xl font-black text-gray-500 mb-2">No matches found</h3>
+            <p className="text-gray-400 font-medium">Try searching for different tags like #WIP or #Finished</p>
           </div>
         )}
       </Container>

@@ -64,7 +64,7 @@ const Navbar = () => {
               id="language-dropdown"
               className="px-2"
             >
-              <NavDropdown.Item onClick={() => changeLanguage('zh')} className="text-sm font-bold">繁體中文</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => changeLanguage('zh_tw')} className="text-sm font-bold">繁體中文</NavDropdown.Item>
               <NavDropdown.Item onClick={() => changeLanguage('en')} className="text-sm font-bold">English</NavDropdown.Item>
             </NavDropdown>
           </Nav>

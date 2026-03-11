@@ -19,8 +19,8 @@ function App() {
         i18n.changeLanguage('en');
       }
     } else {
-      if (i18n.language !== 'zh') {
-        i18n.changeLanguage('zh');
+      if (i18n.language !== 'zh_tw') {
+        i18n.changeLanguage('zh_tw');
       }
     }
   }, [location.pathname, i18n]);

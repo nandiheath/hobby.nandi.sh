@@ -1,36 +1,48 @@
-import React, { useState, useMemo } from 'react';
-import { Container, Row, Col, Card, Badge, Form, InputGroup, Button } from 'react-bootstrap';
-import { Search, PlayCircle, Image as ImageIcon, Clock, ArrowRight, Tag } from 'lucide-react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { Container, Row, Col, Card, Badge, Form, InputGroup, Button, Modal, Carousel } from 'react-bootstrap';
+import { Search, PlayCircle, Image as ImageIcon, Clock, ArrowRight, X, ExternalLink } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import ReactMarkdown from 'react-markdown';
+import { loadMarkdownContent } from '../../utils/contentLoader';
 
 const References = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTag, setSelectedTag] = useState(null);
+  const [referenceItems, setReferenceItems] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
 
-  const referenceItems = useMemo(() => [
-    { id: 1, type: 'tutorial', title: "Edge Highlighting Basics", duration: "10 mins", level: "Beginner", tags: ["Painting", "Basics"] },
-    { id: 2, type: 'tutorial', title: "Weathering with Sponges", duration: "15 mins", level: "Intermediate", tags: ["Weathering", "Technique"] },
-    { id: 3, type: 'tutorial', title: "Creating Realistic Rust", duration: "25 mins", level: "Advanced", tags: ["Weathering", "Advanced"] },
-    { id: 4, type: 'tutorial', title: "Working with Photo Etch", duration: "20 mins", level: "Intermediate", tags: ["Assembly", "Technique"] },
-    { id: 5, type: 'image', title: "Base Coating Session", tags: ["WIP", "Technique"] },
-    { id: 6, type: 'image', title: "Final Polish Detail", tags: ["Finished", "Detail"] },
-    { id: 7, type: 'image', title: "Workshop Setup", tags: ["Workspace"] },
-    { id: 8, type: 'image', title: "Airbrushing Progress", tags: ["WIP", "Tools"] }
-  ], []);
+  useEffect(() => {
+    const fetchContent = async () => {
+      const currentLang = i18n.language === 'en' ? 'en' : 'zh_tw';
+      const items = await loadMarkdownContent('references', currentLang);
+      setReferenceItems(items);
+      
+      // If there was a selected item, update it from the fresh items
+      if (selectedItem) {
+        const updatedItem = items.find(item => item.id === selectedItem.id);
+        if (updatedItem) {
+          setSelectedItem(updatedItem);
+        }
+      }
+    };
+    fetchContent();
+  }, [i18n.language, i18n, selectedItem]);
 
   const allTags = useMemo(() => {
     const tags = new Set();
     referenceItems.forEach(item => {
-      item.tags.forEach(tag => tags.add(tag));
+      if (item.tags && Array.isArray(item.tags)) {
+        item.tags.forEach(tag => tags.add(tag));
+      }
     });
     return Array.from(tags).sort();
   }, [referenceItems]);
 
   const filteredItems = referenceItems.filter(item => {
-    const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    const matchesTag = selectedTag ? item.tags.includes(selectedTag) : true;
+    const matchesSearch = (item.title || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (item.tags || []).some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+    const matchesTag = selectedTag ? (item.tags || []).includes(selectedTag) : true;
     return matchesSearch && matchesTag;
   });
 
@@ -111,26 +123,47 @@ const References = () => {
                       </span>
                     </div>
                     <div className="flex flex-wrap gap-2 mb-8">
-                      {item.tags.map(tag => (
+                      {(item.tags || []).map(tag => (
                         <span key={tag} className="text-xs font-bold text-indigo-500 dark:text-indigo-400">#{tag}</span>
                       ))}
                     </div>
-                    <Button variant="link" className="p-0 text-indigo-600 dark:text-indigo-400 font-black no-underline flex items-center gap-2 hover:gap-4 transition-all mt-auto">
+                    <Button 
+                      variant="link" 
+                      className="p-0 text-indigo-600 dark:text-indigo-400 font-black no-underline flex items-center gap-2 hover:gap-4 transition-all mt-auto"
+                      onClick={() => setSelectedItem(item)}
+                    >
                       {t('home.btn_start_learning')} <ArrowRight size={20} />
                     </Button>
                   </Card.Body>
                 ) : (
                   <>
-                    <div className="h-56 bg-gray-100 dark:bg-gray-800/50 flex items-center justify-center relative overflow-hidden">
-                      <ImageIcon className="text-gray-300 dark:text-gray-600 group-hover:scale-110 transition-transform duration-700" size={56} />
+                    <div 
+                      className="h-56 bg-gray-100 dark:bg-gray-800/50 flex items-center justify-center relative overflow-hidden cursor-pointer"
+                      onClick={() => setSelectedItem(item)}
+                    >
+                      {item.images && item.images.length > 0 ? (
+                        <img 
+                          src={item.images[0].image_url} 
+                          alt={item.images[0].image_title || item.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
+                      ) : (
+                        <ImageIcon className="text-gray-300 dark:text-gray-600 group-hover:scale-110 transition-transform duration-700" size={56} />
+                      )}
                       <Badge className="absolute top-4 right-4 bg-pink-600 text-white rounded-lg px-2 py-1 text-[9px] font-black uppercase tracking-wider border-0 shadow-lg shadow-pink-600/20">
                         {t('references.type_image')}
                       </Badge>
                     </div>
                     <Card.Body className="p-6">
-                      <Card.Title className="text-lg font-black mb-3 dark:text-white group-hover:text-indigo-600 transition-colors">{item.title}</Card.Title>
+                      <Card.Title 
+                        as="h3"
+                        className="text-lg font-black mb-3 dark:text-white group-hover:text-indigo-600 transition-colors cursor-pointer"
+                        onClick={() => setSelectedItem(item)}
+                      >
+                        {item.title}
+                      </Card.Title>
                       <div className="flex flex-wrap gap-2">
-                        {item.tags.map(tag => (
+                        {(item.tags || []).map(tag => (
                           <span key={tag} className="text-[10px] font-bold text-gray-400 dark:text-gray-500">#{tag}</span>
                         ))}
                       </div>
@@ -151,6 +184,88 @@ const References = () => {
             </Col>
           )}
         </Row>
+
+        {/* Detail Modal */}
+        <Modal 
+          show={selectedItem !== null} 
+          onHide={() => setSelectedItem(null)}
+          centered
+          size="lg"
+          contentClassName="glass-card border-0 rounded-[2.5rem] overflow-hidden"
+        >
+          <Modal.Header className="border-0 p-8 pb-0 flex items-center justify-between">
+            <Badge className="bg-indigo-600 text-white rounded-xl px-4 py-2 font-black uppercase tracking-widest text-[10px]">
+              {selectedItem?.type === 'tutorial' ? t('references.type_tutorial') : t('references.type_image')}
+            </Badge>
+            <Button 
+              variant="link" 
+              className="p-2 text-gray-400 hover:text-indigo-600 transition-colors"
+              onClick={() => setSelectedItem(null)}
+            >
+              <X size={24} />
+            </Button>
+          </Modal.Header>
+          <Modal.Body className="p-8 md:p-12 pt-4">
+            {selectedItem?.images && selectedItem.images.length > 0 && (
+              <div className="mb-10 rounded-[2rem] overflow-hidden shadow-2xl bg-gray-100 dark:bg-gray-800">
+                <Carousel interval={null} indicators={selectedItem.images.length > 1} controls={selectedItem.images.length > 1}>
+                  {selectedItem.images.map((img, idx) => (
+                    <Carousel.Item key={idx}>
+                      <div className="relative group/carousel">
+                        <img 
+                          src={img.image_url} 
+                          alt={img.image_title || `${selectedItem.title} ${idx + 1}`}
+                          className="w-full aspect-video object-cover"
+                        />
+                        {(img.image_title || img.origin_url) && (
+                          <Carousel.Caption className="bg-black/60 backdrop-blur-md rounded-2xl px-6 py-4 mb-4 mx-4 text-left border border-white/10 shadow-2xl">
+                            {img.image_title && <h5 className="text-white font-black mb-1">{img.image_title}</h5>}
+                            {img.origin_url && (
+                              <a 
+                                href={img.origin_url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 text-indigo-300 hover:text-indigo-200 text-xs font-bold no-underline transition-colors"
+                              >
+                                <ExternalLink size={12} /> {t('portfolio.source')}
+                              </a>
+                            )}
+                          </Carousel.Caption>
+                        )}
+                      </div>
+                    </Carousel.Item>
+                  ))}
+                </Carousel>
+              </div>
+            )}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+              <h2 className="text-3xl md:text-4xl font-black dark:text-white mb-0">{selectedItem?.title}</h2>
+              {selectedItem?.origin_url && (
+                <a 
+                  href={selectedItem.origin_url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-100 dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 font-bold text-sm no-underline hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-all w-fit"
+                >
+                  <ExternalLink size={16} /> {t('portfolio.source')}
+                </a>
+              )}
+            </div>
+            {selectedItem?.type === 'tutorial' && (
+              <div className="flex flex-wrap items-center gap-6 mb-8 text-sm font-bold text-gray-500 dark:text-gray-400">
+                <span className="flex items-center gap-2">
+                  <Clock size={20} className="text-indigo-600" /> {selectedItem?.duration}
+                </span>
+                <span className="px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-gray-800 text-[12px] uppercase tracking-wider">
+                  {selectedItem?.level}
+                </span>
+              </div>
+            )}
+            <div className="prose dark:prose-invert max-w-none dark:text-gray-300 font-medium leading-loose">
+              <ReactMarkdown>{selectedItem?.content}</ReactMarkdown>
+            </div>
+          </Modal.Body>
+        </Modal>
       </Container>
     </div>
   );

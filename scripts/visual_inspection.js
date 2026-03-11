@@ -43,6 +43,8 @@ async function captureScreenshots() {
       const fileName = route.replace(/\//g, '_') || 'index';
       console.log(`Capturing ${url}...`);
       await page.goto(url, { waitUntil: 'networkidle' });
+      // Extra wait to ensure content is rendered
+      await page.waitForTimeout(2000);
       await page.screenshot({ path: path.join(screenshotsDir, `${fileName}.png`), fullPage: true });
     }
 

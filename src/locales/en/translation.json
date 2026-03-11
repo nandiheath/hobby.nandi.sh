@@ -23,7 +23,8 @@
     "title": "Project Portfolio",
     "subtitle": "A selection of my finest work and ongoing creative projects.",
     "filter_btn": "Filter Work",
-    "explore_btn": "Explore Project"
+    "explore_btn": "Explore Project",
+    "source": "Source"
   },
   "references": {
     "title": "Reference Resources",

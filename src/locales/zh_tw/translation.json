@@ -1,0 +1,49 @@
+{
+  "navbar": {
+    "home": "首頁",
+    "portfolio": "作品集",
+    "tutorials": "教學集",
+    "gallery": "圖庫"
+  },
+  "home": {
+    "hero_title_line1": "創作。 建築。",
+    "hero_title_accent": "啟發。",
+    "hero_desc": "透過詳細的教學與展示，探索模型、微縮模型與創意手作的藝術。",
+    "btn_view_work": "查看作品",
+    "btn_start_learning": "開始學習",
+    "section_title": "探索愛好",
+    "section_desc": "發現專案、技巧與靈感",
+    "portfolio_title": "作品集",
+    "portfolio_desc": "展示精緻的微縮模型與高端模型。",
+    "portfolio_link": "瀏覽作品",
+    "tutorials_title": "教學集",
+    "tutorials_desc": "針對進階塗裝與建築技巧的逐步指南。",
+    "tutorials_link": "了解更多",
+    "gallery_title": "圖庫",
+    "gallery_desc": "工作台上的原始捕捉、製作中截圖與視覺靈感。",
+    "gallery_link": "查看資源"
+  },
+  "portfolio": {
+    "title": "專案作品集",
+    "subtitle": "精選優秀作品與持續進行中的創意專案。",
+    "filter_btn": "篩選作品",
+    "explore_btn": "探索專案"
+  },
+  "tutorials": {
+    "title": "技巧教學",
+    "subtitle": "精通微縮模型塗裝與模型建築的藝術。",
+    "search_placeholder": "按標題搜尋教學...",
+    "no_results": "找不到教學",
+    "no_results_desc": "嘗試搜尋不同的關鍵字或瀏覽所有指南。"
+  },
+  "gallery": {
+    "title": "視覺圖庫",
+    "subtitle": "創意模型製作過程的視覺記錄。",
+    "search_placeholder": "按標題或 #標籤搜尋...",
+    "no_results": "找不到相符內容",
+    "no_results_desc": "嘗試搜尋不同的標籤，例如 #製作中 或 #已完成"
+  },
+  "footer": {
+    "crafted": "為模型社群傾心打造。"
+  }
+}

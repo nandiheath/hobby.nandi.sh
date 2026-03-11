@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, ListGroup, InputGroup, Form, Card } from 'react-bootstrap';
+import { Container, Row, Col, ListGroup, InputGroup, Form, Card, Badge } from 'react-bootstrap';
 import { Search, Clock, PlayCircle, ArrowRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Tutorials = () => {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
   
   const tutorials = [
@@ -20,8 +22,8 @@ const Tutorials = () => {
     <div className="bg-transparent">
       <Container className="max-w-4xl">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-3 tracking-tight">Skill Tutorials</h1>
-          <p className="text-lg text-gray-500 dark:text-gray-400 font-medium">Master the art of miniature painting and model building.</p>
+          <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-3 tracking-tight">{t('tutorials.title')}</h1>
+          <p className="text-lg text-gray-500 dark:text-gray-400 font-medium">{t('tutorials.subtitle')}</p>
         </div>
         
         <Card className="glass-card border-0 rounded-[2rem] overflow-hidden mb-12 p-2">
@@ -31,7 +33,7 @@ const Tutorials = () => {
                 <Search className="text-gray-400 w-6 h-6" />
               </InputGroup.Text>
               <Form.Control 
-                placeholder="Search tutorials by title..." 
+                placeholder={t('tutorials.search_placeholder')} 
                 className="border-0 py-4 focus:ring-0 bg-transparent dark:text-white text-lg font-medium placeholder:text-gray-400 placeholder:font-normal"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -77,8 +79,8 @@ const Tutorials = () => {
           {filteredTutorials.length === 0 && (
             <div className="glass-card p-20 text-center rounded-[3rem]">
               <div className="text-6xl mb-6 opacity-30">🔍</div>
-              <h3 className="text-2xl font-black text-gray-500 mb-2">No tutorials found</h3>
-              <p className="text-gray-400 font-medium">Try searching for different keywords or browse all guides.</p>
+              <h3 className="text-2xl font-black text-gray-500 mb-2">{t('tutorials.no_results')}</h3>
+              <p className="text-gray-400 font-medium">{t('tutorials.no_results_desc')}</p>
             </div>
           )}
         </div>

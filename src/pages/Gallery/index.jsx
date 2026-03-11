@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Badge, Form, InputGroup } from 'react-bootstrap';
 import { Search, Image as ImageIcon, Filter, Maximize2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Gallery = () => {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
   
   const images = [
@@ -22,8 +24,8 @@ const Gallery = () => {
       <Container>
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-16 gap-6">
           <div className="text-center text-md-start">
-            <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-2 tracking-tight">Visual Gallery</h1>
-            <p className="text-lg text-gray-500 dark:text-gray-400 font-medium">A visual record of the creative modeling process.</p>
+            <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-2 tracking-tight">{t('gallery.title')}</h1>
+            <p className="text-lg text-gray-500 dark:text-gray-400 font-medium">{t('gallery.subtitle')}</p>
           </div>
           
           <div className="w-100 max-w-md">
@@ -33,7 +35,7 @@ const Gallery = () => {
                   <Search className="text-gray-400" size={20} />
                 </InputGroup.Text>
                 <Form.Control 
-                  placeholder="Search by title or #tag..." 
+                  placeholder={t('gallery.search_placeholder')} 
                   className="border-0 py-3 focus:ring-0 bg-transparent dark:text-white font-medium"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
@@ -77,8 +79,8 @@ const Gallery = () => {
         {filteredImages.length === 0 && (
           <div className="glass-card p-20 text-center rounded-[3rem] mt-12">
             <div className="text-7xl mb-6 opacity-20">🖼️</div>
-            <h3 className="text-2xl font-black text-gray-500 mb-2">No matches found</h3>
-            <p className="text-gray-400 font-medium">Try searching for different tags like #WIP or #Finished</p>
+            <h3 className="text-2xl font-black text-gray-500 mb-2">{t('gallery.no_results')}</h3>
+            <p className="text-gray-400 font-medium">{t('gallery.no_results_desc')}</p>
           </div>
         )}
       </Container>

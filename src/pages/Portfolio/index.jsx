@@ -1,8 +1,10 @@
 import React from 'react';
 import { Container, Row, Col, Card, Badge, Button } from 'react-bootstrap';
 import { Filter, ArrowRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Portfolio = () => {
+  const { t } = useTranslation();
   const projects = [
     { id: 1, title: "Stormcast Eternal", category: "Miniature", description: "Detailed gold armor with blue accents." },
     { id: 2, title: "WWII Tank Diorama", category: "Model", description: "A muddy winter scene in 1/35 scale." },
@@ -14,11 +16,11 @@ const Portfolio = () => {
       <Container>
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-12 text-center text-md-start gap-4">
           <div>
-            <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-2 tracking-tight">Project Portfolio</h1>
-            <p className="text-lg text-gray-500 dark:text-gray-400 font-medium">A selection of my finest work and ongoing creative projects.</p>
+            <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-2 tracking-tight">{t('portfolio.title')}</h1>
+            <p className="text-lg text-gray-500 dark:text-gray-400 font-medium">{t('portfolio.subtitle')}</p>
           </div>
           <Button variant="outline-indigo" className="rounded-2xl px-5 py-3 font-black border-2 flex items-center gap-2 hover:bg-indigo-600 hover:text-white transition-all">
-            <Filter size={20} /> Filter Work
+            <Filter size={20} /> {t('portfolio.filter_btn')}
           </Button>
         </div>
         
@@ -42,7 +44,7 @@ const Portfolio = () => {
                     {project.description}
                   </Card.Text>
                   <Button variant="link" className="p-0 text-indigo-600 dark:text-indigo-400 font-black no-underline flex items-center gap-2 hover:gap-4 transition-all">
-                    Explore Project <ArrowRight size={20} />
+                    {t('portfolio.explore_btn')} <ArrowRight size={20} />
                   </Button>
                 </Card.Body>
               </Card>

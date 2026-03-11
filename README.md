@@ -70,3 +70,12 @@ This project is configured to automatically deploy to the **gh-pages** branch on
 - **Bootstrap 5**: Component-based CSS framework via `react-bootstrap`.
 - **React Router v7**: Client-side routing.
 - **Lucide React**: Icon library.
+- **Playwright**: Browser automation for screenshots and visual testing.
+
+## 🛠️ Automation & Agent Skills
+
+This repository includes specialized automation scripts and "skills" designed to assist both developers and AI agents in maintaining and scaling the application.
+
+- **[Visual Inspection Skill](./docs/skills/visual_inspection.md)**: Capture and audit the application's visual state and DOM structure.
+- **[Translation Management Skill](./docs/skills/translation_management.md)**: Automatically identify i18n gaps between locales.
+- **Implementation Scripts**: Located in `scripts/`.

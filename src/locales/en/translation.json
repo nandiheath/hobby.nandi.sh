@@ -1,0 +1,49 @@
+{
+  "navbar": {
+    "home": "Home",
+    "portfolio": "Portfolio",
+    "tutorials": "Tutorials",
+    "gallery": "Gallery"
+  },
+  "home": {
+    "hero_title_line1": "Create. Build.",
+    "hero_title_accent": "Inspire.",
+    "hero_desc": "Exploring the artistry of miniatures, model building, and creative crafting through detailed tutorials and showcases.",
+    "btn_view_work": "View My Work",
+    "btn_start_learning": "Start Learning",
+    "section_title": "Explore the Hobby",
+    "section_desc": "Discover projects, techniques, and inspiration",
+    "portfolio_title": "Portfolio",
+    "portfolio_desc": "Detailed showcases of finished miniatures and high-end models.",
+    "portfolio_link": "Browse Works",
+    "tutorials_title": "Tutorials",
+    "tutorials_desc": "Step-by-step guides for advanced painting and building techniques.",
+    "tutorials_link": "Learn More",
+    "gallery_title": "Gallery",
+    "gallery_desc": "Raw captures, WIP shots, and visual inspiration from the workbench.",
+    "gallery_link": "View Assets"
+  },
+  "portfolio": {
+    "title": "Project Portfolio",
+    "subtitle": "A selection of my finest work and ongoing creative projects.",
+    "filter_btn": "Filter Work",
+    "explore_btn": "Explore Project"
+  },
+  "tutorials": {
+    "title": "Skill Tutorials",
+    "subtitle": "Master the art of miniature painting and model building.",
+    "search_placeholder": "Search tutorials by title...",
+    "no_results": "No tutorials found",
+    "no_results_desc": "Try searching for different keywords or browse all guides."
+  },
+  "gallery": {
+    "title": "Visual Gallery",
+    "subtitle": "A visual record of the creative modeling process.",
+    "search_placeholder": "Search by title or #tag...",
+    "no_results": "No matches found",
+    "no_results_desc": "Try searching for different tags like #WIP or #Finished"
+  },
+  "footer": {
+    "crafted": "Crafted with passion for the modeling community."
+  }
+}

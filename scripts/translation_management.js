@@ -26,13 +26,6 @@ function getValueByPath(obj, path) {
   return path.split('.').reduce((o, i) => (o ? o[i] : undefined), obj);
 }
 
-function setValueByPath(obj, path, value) {
-  const parts = path.split('.');
-  const last = parts.pop();
-  const target = parts.reduce((o, i) => (o[i] = o[i] || {}), obj);
-  target[last] = value;
-}
-
 async function runTranslation() {
   if (!fs.existsSync(ZH_PATH)) {
     console.error('Traditional Chinese translation file not found.');

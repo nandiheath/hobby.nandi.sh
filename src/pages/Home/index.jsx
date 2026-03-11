@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Palette, Book, Camera } from 'lucide-react';
+import { ArrowRight, Palette, Book } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const Home = () => {
@@ -9,10 +9,10 @@ const Home = () => {
   const base = i18n.language === 'en' ? '/en' : '';
 
   return (
-    <div className="bg-transparent">
+    <div className="bg-transparent py-12 md:py-20 lg:py-24">
       <Container>
         {/* Hero Section */}
-        <div className="relative overflow-hidden mb-16 p-12 md:p-20 bg-gray-900 rounded-3xl md:rounded-[3rem] shadow-2xl text-center text-white">
+        <div className="relative overflow-hidden mb-24 p-12 md:p-20 bg-gray-900 rounded-3xl md:rounded-[3rem] shadow-2xl text-center text-white">
           <div className="absolute inset-0 hero-gradient opacity-90"></div>
           <div className="relative z-10">
             <h1 className="text-4xl md:text-7xl font-black mb-6 tracking-tight leading-tight">
@@ -25,7 +25,7 @@ const Home = () => {
               <Button as={Link} to={`${base}/portfolio`} className="bg-white text-indigo-700 hover:bg-indigo-50 border-0 px-8 py-4 rounded-2xl font-black text-lg transition-all transform hover:scale-105 shadow-xl">
                 {t('home.btn_view_work')}
               </Button>
-              <Button as={Link} to={`${base}/tutorials`} className="bg-indigo-500/20 backdrop-blur-md text-white hover:bg-indigo-500/30 border border-white/30 px-8 py-4 rounded-2xl font-black text-lg transition-all transform hover:scale-105">
+              <Button as={Link} to={`${base}/references`} className="bg-indigo-500/20 backdrop-blur-md text-white hover:bg-indigo-500/30 border border-white/30 px-8 py-4 rounded-2xl font-black text-lg transition-all transform hover:scale-105">
                 {t('home.btn_start_learning')}
               </Button>
             </div>
@@ -41,8 +41,8 @@ const Home = () => {
           <p className="text-gray-500 dark:text-gray-400">{t('home.section_desc')}</p>
         </div>
 
-        <Row className="g-5">
-          <Col md={4}>
+        <Row className="g-5 justify-content-center">
+          <Col md={5}>
             <Card className="glass-card h-100 border-0 rounded-[2rem] overflow-hidden group transition-all duration-500 hover:-translate-y-3">
               <Card.Body className="p-10 text-center">
                 <div className="w-16 h-16 bg-indigo-100 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 rounded-2xl flex items-center justify-center mb-8 mx-auto transform group-hover:rotate-12 transition-transform">
@@ -58,34 +58,18 @@ const Home = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={4}>
+          <Col md={5}>
             <Card className="glass-card h-100 border-0 rounded-[2rem] overflow-hidden group transition-all duration-500 hover:-translate-y-3">
               <Card.Body className="p-10 text-center">
                 <div className="w-16 h-16 bg-purple-100 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center mb-8 mx-auto transform group-hover:rotate-12 transition-transform">
                   <Book size={32} />
                 </div>
-                <Card.Title className="text-2xl font-black mb-4 dark:text-white">{t('home.tutorials_title')}</Card.Title>
+                <Card.Title className="text-2xl font-black mb-4 dark:text-white">{t('home.references_title')}</Card.Title>
                 <Card.Text className="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
-                  {t('home.tutorials_desc')}
+                  {t('home.references_desc')}
                 </Card.Text>
-                <Link to={`${base}/tutorials`} className="inline-flex items-center gap-2 font-black text-purple-600 dark:text-purple-400 hover:gap-4 transition-all no-underline">
-                  {t('home.tutorials_link')} <ArrowRight size={20} />
-                </Link>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col md={4}>
-            <Card className="glass-card h-100 border-0 rounded-[2rem] overflow-hidden group transition-all duration-500 hover:-translate-y-3">
-              <Card.Body className="p-10 text-center">
-                <div className="w-16 h-16 bg-pink-100 dark:bg-pink-500/20 text-pink-600 dark:text-pink-400 rounded-2xl flex items-center justify-center mb-8 mx-auto transform group-hover:rotate-12 transition-transform">
-                  <Camera size={32} />
-                </div>
-                <Card.Title className="text-2xl font-black mb-4 dark:text-white">{t('home.gallery_title')}</Card.Title>
-                <Card.Text className="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
-                  {t('home.gallery_desc')}
-                </Card.Text>
-                <Link to={`${base}/gallery`} className="inline-flex items-center gap-2 font-black text-pink-600 dark:text-pink-400 hover:gap-4 transition-all no-underline">
-                  {t('home.gallery_link')} <ArrowRight size={20} />
+                <Link to={`${base}/references`} className="inline-flex items-center gap-2 font-black text-purple-600 dark:text-purple-400 hover:gap-4 transition-all no-underline">
+                  {t('home.references_link')} <ArrowRight size={20} />
                 </Link>
               </Card.Body>
             </Card>

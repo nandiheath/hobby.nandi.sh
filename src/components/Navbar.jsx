@@ -15,8 +15,7 @@ const Navbar = () => {
   const navItems = [
     { name: t('navbar.home'), path: `${base}/` },
     { name: t('navbar.portfolio'), path: `${base}/portfolio` },
-    { name: t('navbar.tutorials'), path: `${base}/tutorials` },
-    { name: t('navbar.gallery'), path: `${base}/gallery` },
+    { name: t('navbar.references'), path: `${base}/references` },
   ];
 
   const changeLanguage = (lng) => {

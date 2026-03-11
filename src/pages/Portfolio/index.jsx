@@ -12,9 +12,9 @@ const Portfolio = () => {
   ];
 
   return (
-    <div className="bg-transparent">
+    <div className="bg-transparent py-12 md:py-20 lg:py-24">
       <Container>
-        <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-12 text-center text-md-start gap-4">
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-16 text-center text-md-start gap-6">
           <div>
             <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-2 tracking-tight">{t('portfolio.title')}</h1>
             <p className="text-lg text-gray-500 dark:text-gray-400 font-medium">{t('portfolio.subtitle')}</p>

@@ -20,8 +20,8 @@ async function captureScreenshots() {
 
   const baseUrl = 'http://localhost:5173';
   const routes = [
-    '/', '/portfolio', '/tutorials', '/gallery',
-    '/en', '/en/portfolio', '/en/tutorials', '/en/gallery'
+    '/', '/portfolio', '/references',
+    '/en', '/en/portfolio', '/en/references'
   ];
 
   try {
@@ -32,7 +32,7 @@ async function captureScreenshots() {
         await page.goto(baseUrl);
         console.log('Dev server ready.');
         break;
-      } catch (e) {
+      } catch {
         attempts++;
         await new Promise(r => setTimeout(r, 1000));
       }

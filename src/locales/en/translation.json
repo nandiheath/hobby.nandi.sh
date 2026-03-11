@@ -2,8 +2,7 @@
   "navbar": {
     "home": "Home",
     "portfolio": "Portfolio",
-    "tutorials": "Tutorials",
-    "gallery": "Gallery"
+    "references": "References"
   },
   "home": {
     "hero_title_line1": "Create. Build.",
@@ -16,12 +15,9 @@
     "portfolio_title": "Portfolio",
     "portfolio_desc": "Detailed showcases of finished miniatures and high-end models.",
     "portfolio_link": "Browse Works",
-    "tutorials_title": "Tutorials",
-    "tutorials_desc": "Step-by-step guides for advanced painting and building techniques.",
-    "tutorials_link": "Learn More",
-    "gallery_title": "Gallery",
-    "gallery_desc": "Raw captures, WIP shots, and visual inspiration from the workbench.",
-    "gallery_link": "View Assets"
+    "references_title": "References",
+    "references_desc": "A one-stop resource for tutorials, techniques, and visual inspiration.",
+    "references_link": "Browse References"
   },
   "portfolio": {
     "title": "Project Portfolio",
@@ -29,19 +25,15 @@
     "filter_btn": "Filter Work",
     "explore_btn": "Explore Project"
   },
-  "tutorials": {
-    "title": "Skill Tutorials",
-    "subtitle": "Master the art of miniature painting and model building.",
-    "search_placeholder": "Search tutorials by title...",
-    "no_results": "No tutorials found",
-    "no_results_desc": "Try searching for different keywords or browse all guides."
-  },
-  "gallery": {
-    "title": "Visual Gallery",
-    "subtitle": "A visual record of the creative modeling process.",
-    "search_placeholder": "Search by title or #tag...",
+  "references": {
+    "title": "Reference Resources",
+    "subtitle": "Master the art of miniature painting and model building through tutorials and visual records.",
+    "search_placeholder": "Search tutorials, tags, or keywords...",
     "no_results": "No matches found",
-    "no_results_desc": "Try searching for different tags like #WIP or #Finished"
+    "no_results_desc": "Try searching for different keywords or filter by tags.",
+    "all_tags": "All Tags",
+    "type_tutorial": "Tutorial",
+    "type_image": "Image"
   },
   "footer": {
     "crafted": "Crafted with passion for the modeling community."

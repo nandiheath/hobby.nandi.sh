@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Portfolio from './pages/Portfolio';
-import Tutorials from './pages/Tutorials';
-import Gallery from './pages/Gallery';
+import References from './pages/References';
 
 function App() {
   const { t, i18n } = useTranslation();
   const location = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const pathParts = location.pathname.split('/');
@@ -30,18 +28,16 @@ function App() {
   return (
     <div className="min-h-screen bg-transparent flex flex-col font-sans selection:bg-indigo-100 selection:text-indigo-900">
       <Navbar />
-      <main className="flex-grow py-12 md:py-20 lg:py-24">
+      <main className="flex-grow pb-12 md:pb-20 lg:pb-24">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/tutorials" element={<Tutorials />} />
-          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/references" element={<References />} />
           
           <Route path="/en">
             <Route index element={<Home />} />
             <Route path="portfolio" element={<Portfolio />} />
-            <Route path="tutorials" element={<Tutorials />} />
-            <Route path="gallery" element={<Gallery />} />
+            <Route path="references" element={<References />} />
           </Route>
         </Routes>
       </main>

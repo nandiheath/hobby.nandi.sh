@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Badge, Button } from 'react-bootstrap';
-import { PlayCircle, Image as ImageIcon, Clock, ArrowRight } from 'lucide-react';
+import { PlayCircle, Image as ImageIcon, Clock, ArrowRight, Instagram } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { ContentItem } from '../../utils/contentLoader';
 
@@ -69,7 +69,11 @@ const ContentCard: React.FC<ContentCardProps> = ({ item, onClick }) => {
         ) : (
           <div className="flex flex-col items-center gap-4">
             <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-purple-500/10 group-hover:scale-110 transition-transform duration-700"></div>
-            <ImageIcon className="text-gray-300 dark:text-gray-600 group-hover:scale-110 transition-transform duration-700 relative z-10" size={56} />
+            {item.instagram_id ? (
+              <Instagram className="text-pink-500/60 group-hover:scale-110 transition-transform duration-700 relative z-10" size={56} />
+            ) : (
+              <ImageIcon className="text-gray-300 dark:text-gray-600 group-hover:scale-110 transition-transform duration-700 relative z-10" size={56} />
+            )}
             {item.category && <span className="text-gray-400 font-black text-xl opacity-30 uppercase tracking-widest relative z-10">{item.category}</span>}
           </div>
         )}

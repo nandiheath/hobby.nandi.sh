@@ -30,6 +30,13 @@ npm run dev
 ```
 The app will be available at `http://localhost:5173`.
 
+### Storybook
+
+To view and test individual components in isolation:
+```bash
+npm run storybook
+```
+
 ### Production Build
 
 Create an optimized production bundle in the `dist/` directory:

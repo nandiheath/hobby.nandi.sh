@@ -8,7 +8,7 @@ export interface ContentImage {
 
 export interface ContentItem {
   id: string | number;
-  type: 'tutorial' | 'image' | 'project';
+  type: 'tutorial' | 'image' | 'project' | 'instagram' | 'text' | 'carousel';
   title: string;
   tags: string[];
   images: ContentImage[];
@@ -19,6 +19,7 @@ export interface ContentItem {
   category?: string;
   description?: string;
   origin_url?: string;
+  instagram_id?: string;
   [key: string]: any;
 }
 

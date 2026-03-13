@@ -20,15 +20,13 @@ const References: React.FC = () => {
       const items = await loadMarkdownContent('references', currentLang);
       setReferenceItems(items);
       
-      if (selectedItem) {
-        const updatedItem = items.find(item => item.id === selectedItem.id);
-        if (updatedItem) {
-          setSelectedItem(updatedItem);
-        }
-      }
+      setSelectedItem(prev => {
+        if (!prev) return null;
+        return items.find(item => item.id === prev.id) || null;
+      });
     };
     fetchContent();
-  }, [i18n.language, selectedItem]);
+  }, [i18n.language]);
 
   const allTags = useMemo(() => {
     const tags = new Set<string>();

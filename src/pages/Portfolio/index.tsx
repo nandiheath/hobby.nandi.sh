@@ -17,13 +17,13 @@ const Portfolio: React.FC = () => {
       const items = await loadMarkdownContent('portfolio', currentLang);
       setProjects(items);
 
-      if (selectedProject) {
-        const updated = items.find(p => p.id === selectedProject.id);
-        if (updated) setSelectedProject(updated);
-      }
+      setSelectedProject(prev => {
+        if (!prev) return null;
+        return items.find(p => p.id === prev.id) || null;
+      });
     };
     fetchContent();
-  }, [i18n.language, selectedProject]);
+  }, [i18n.language]);
 
   return (
     <div className="bg-transparent py-12 md:py-20 lg:py-24">

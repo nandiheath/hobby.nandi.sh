@@ -9,7 +9,7 @@ const resources = {
   en: {
     translation: translationEN,
   },
-  zh: {
+  zh_tw: {
     translation: translationZH,
   },
 };
@@ -19,8 +19,8 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: 'zh',
-    supportedLngs: ['en', 'zh'],
+    fallbackLng: 'zh_tw',
+    supportedLngs: ['en', 'zh_tw'],
     interpolation: {
       escapeValue: false,
     },

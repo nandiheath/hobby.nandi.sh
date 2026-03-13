@@ -37,6 +37,17 @@ Create an optimized production bundle in the `dist/` directory:
 npm run build
 ```
 
+### Pre-commit Checks
+
+This project uses **husky** and **lint-staged** to ensure code quality. Before every commit, the following checks are automatically performed:
+- **Linting**: Automatically runs `eslint --fix` on staged `.ts` and `.tsx` files.
+- **Type Checking**: Runs `tsc --noEmit` on staged `.ts` and `.tsx` files to catch any TypeScript errors.
+
+To bypass these checks (not recommended), use the `--no-verify` flag:
+```bash
+git commit -m "your message" --no-verify
+```
+
 ## 📂 Project Structure
 
 - `src/components/`: Reusable UI components (e.g., `Navbar`).

@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import Portfolio from './pages/Portfolio';
 import References from './pages/References';
 
-function App() {
+const App: React.FC = () => {
   const { t, i18n } = useTranslation();
   const location = useLocation();
 

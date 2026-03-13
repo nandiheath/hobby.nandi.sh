@@ -4,7 +4,7 @@ import { Navbar as BootstrapNavbar, Nav, Container, NavDropdown } from 'react-bo
 import { useTranslation } from 'react-i18next';
 import { Globe } from 'lucide-react';
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   const { t, i18n } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const Navbar = () => {
     { name: t('navbar.references'), path: `${base}/references` },
   ];
 
-  const changeLanguage = (lng) => {
+  const changeLanguage = (lng: string) => {
     const pathParts = location.pathname.split('/');
     if (lng === 'en') {
       if (pathParts[1] !== 'en') {
@@ -42,13 +42,12 @@ const Navbar = () => {
         <BootstrapNavbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto items-center gap-2">
             {navItems.map((item) => (
-              <Nav.Link
+              <RouterNavLink
                 key={item.name}
-                as={RouterNavLink}
                 to={item.path}
                 end={item.path === `${base}/`}
-                className={({ isActive }) =>
-                  `px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 ${
+                className={({ isActive }: { isActive: boolean }) =>
+                  `nav-link px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 ${
                     isActive
                       ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30'
                       : 'text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400'
@@ -56,7 +55,7 @@ const Navbar = () => {
                 }
               >
                 {item.name}
-              </Nav.Link>
+              </RouterNavLink>
             ))}
             
             <NavDropdown 

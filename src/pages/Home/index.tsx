@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Palette, Book } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-const Home = () => {
+const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
   const base = i18n.language === 'en' ? '/en' : '';
 
@@ -22,10 +22,10 @@ const Home = () => {
               {t('home.hero_desc')}
             </p>
             <div className="flex flex-col sm:flex-row justify-center items-center gap-5">
-              <Button as={Link} to={`${base}/portfolio`} className="bg-white text-indigo-700 hover:bg-indigo-50 border-0 px-8 py-4 rounded-2xl font-black text-lg transition-all transform hover:scale-105 shadow-xl">
+              <Button as={Link as any} to={`${base}/portfolio`} className="bg-white text-indigo-700 hover:bg-indigo-50 border-0 px-8 py-4 rounded-2xl font-black text-lg transition-all transform hover:scale-105 shadow-xl">
                 {t('home.btn_view_work')}
               </Button>
-              <Button as={Link} to={`${base}/references`} className="bg-indigo-500/20 backdrop-blur-md text-white hover:bg-indigo-500/30 border border-white/30 px-8 py-4 rounded-2xl font-black text-lg transition-all transform hover:scale-105">
+              <Button as={Link as any} to={`${base}/references`} className="bg-indigo-500/20 backdrop-blur-md text-white hover:bg-indigo-500/30 border border-white/30 px-8 py-4 rounded-2xl font-black text-lg transition-all transform hover:scale-105">
                 {t('home.btn_start_learning')}
               </Button>
             </div>

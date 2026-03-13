@@ -1,5 +1,26 @@
 import matter from 'gray-matter';
-// Buffer is now handled in src/main.jsx
+
+export interface ContentImage {
+  image_url: string;
+  image_title?: string;
+  origin_url?: string;
+}
+
+export interface ContentItem {
+  id: string | number;
+  type: 'tutorial' | 'image' | 'project';
+  title: string;
+  tags: string[];
+  images: ContentImage[];
+  content: string;
+  filename: string;
+  duration?: string;
+  level?: string;
+  category?: string;
+  description?: string;
+  origin_url?: string;
+  [key: string]: any;
+}
 
 /**
  * Loads content from markdown files using Vite's glob import.
@@ -7,27 +28,27 @@ import matter from 'gray-matter';
  * then merge with translations from the current language if available.
  * 
  * @param {string} section - 'references' or 'portfolio'
- * @param {string} lang - current language code ('en' or 'zh')
- * @returns {Array} - Array of content items with metadata and body
+ * @param {string} lang - current language code ('en' or 'zh_tw')
+ * @returns {Promise<ContentItem[]>} - Array of content items with metadata and body
  */
-export const loadMarkdownContent = async (section, lang) => {
+export const loadMarkdownContent = async (section: 'references' | 'portfolio', lang: string): Promise<ContentItem[]> => {
   // Vite's import.meta.glob requires string literals, so we must be explicit
-  let zhModules, enModules;
+  let zhModules: Record<string, any>, enModules: Record<string, any>;
 
   if (section === 'references') {
     zhModules = import.meta.glob('../content/references/zh_tw/*.md', { query: '?raw', import: 'default', eager: true });
     enModules = import.meta.glob('../content/references/en/*.md', { query: '?raw', import: 'default', eager: true });
-  } else if (section === 'portfolio') {
+  } else {
     zhModules = import.meta.glob('../content/portfolio/zh_tw/*.md', { query: '?raw', import: 'default', eager: true });
     enModules = import.meta.glob('../content/portfolio/en/*.md', { query: '?raw', import: 'default', eager: true });
   }
 
-  const items = [];
+  const items: ContentItem[] = [];
   
   for (const path in zhModules) {
     try {
-      const filename = path.split('/').pop();
-      const zhContent = zhModules[path];
+      const filename = path.split('/').pop() || '';
+      const zhContent = zhModules[path] as string;
       const { data: zhData, content: zhBody } = matter(zhContent);
 
       let finalData = { ...zhData };
@@ -38,17 +59,17 @@ export const loadMarkdownContent = async (section, lang) => {
         const enPath = path.replace('/zh_tw/', '/en/');
         if (enModules[enPath]) {
           try {
-            const enContent = enModules[enPath];
+            const enContent = enModules[enPath] as string;
             const { data: enData, content: enBody } = matter(enContent);
             finalData = { ...finalData, ...enData };
             finalContent = enBody;
-          } catch (e) {
+          } catch (e: any) {
             console.error(`Error loading English translation for ${path}:`, e.name, e.message);
           }
         }
       }
 
-      const normalizedImages = Array.isArray(finalData.images) ? finalData.images.map(img => {
+      const normalizedImages: ContentImage[] = Array.isArray(finalData.images) ? finalData.images.map((img: any) => {
         if (typeof img === 'string') {
           return { image_url: img, image_title: '', origin_url: '' };
         }
@@ -59,7 +80,7 @@ export const loadMarkdownContent = async (section, lang) => {
         };
       }) : [];
 
-      const item = {
+      const item: ContentItem = {
         id: finalData.id || filename.replace('.md', ''),
         type: finalData.type || (section === 'references' ? 'image' : 'project'),
         title: finalData.title || 'Untitled',
@@ -71,10 +92,14 @@ export const loadMarkdownContent = async (section, lang) => {
       };
       
       items.push(item);
-    } catch (e) {
+    } catch (e: any) {
       console.error(`CRITICAL: Error loading ${section} at ${path}:`, e.name, e.message);
     }
   }
 
-  return items.sort((a, b) => (a.id || 0) - (b.id || 0));
+  return items.sort((a, b) => {
+    const idA = typeof a.id === 'number' ? a.id : parseInt(a.id as string) || 0;
+    const idB = typeof b.id === 'number' ? b.id : parseInt(b.id as string) || 0;
+    return idA - idB;
+  });
 };
